@@ -1,6 +1,6 @@
 # bcc
 
-Battery Charging Controller for Termux. Only works on Xperia M with Magisk rooted lineage-14.1-20180622-UNOFFICIAL-nicki for now.
+Battery Charging Controller for Termux. Keeps battery charge between 65% to 75% when plugged in 24/7. Only works on Xperia M with Magisk rooted lineage-14.1-20180622-UNOFFICIAL-nicki for now.
 
 ## Prerequisites
 
