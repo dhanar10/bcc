@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+# Tested on Sony Xperia M - LineageOS 14 - Termux
+
+get_battery_percent() { 
+	cat /sys/class/power_supply/battery/capacity
+}
+
+set_charging_enabled() {
+	[ $1 -eq 1 ] \
+		&& echo 0 > /sys/module/pm8921_charger/parameters/disabled \
+		|| echo 1 > /sys/module/pm8921_charger/parameters/disabled
+}
+
+get_charging_enabled() {
+	[ $(cat /sys/module/pm8921_charger/parameters/disabled) -eq 0 ] \
+		&& echo 1 \
+		|| echo 0 
+}
+
+set_charging_enabled 1
+
+while true; do
+	if [ $(get_charging_enabled) -eq 1 ]; then
+		if [ $(get_battery_percent) -ge 75  ]; then
+			set_charging_enabled 0
+		fi
+	else
+		if [ $(get_battery_percent) -le 65  ]; then
+			set_charging_enabled 1
+		fi
+	fi
+	echo $(date): Battery $(get_battery_percent), Charging $(get_charging_enabled)
+	sleep 300
+done

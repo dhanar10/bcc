@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+screen -dmfa -S bcc su -c /data/data/com.termux/files/home/bcc/bcc
